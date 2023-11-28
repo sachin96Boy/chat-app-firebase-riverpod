@@ -9,7 +9,11 @@ class RegisterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        forceMaterialTransparency: true,
+        backgroundColor: Colors.transparent,
+        primary: true,
+      ),
       body: Container(
         margin: const EdgeInsets.symmetric(horizontal: 20),
         child: SingleChildScrollView(

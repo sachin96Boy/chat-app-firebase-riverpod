@@ -10,7 +10,9 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        forceMaterialTransparency: true,
+      ),
       body: Container(
         margin: const EdgeInsets.symmetric(horizontal: 20),
         child: SingleChildScrollView(
