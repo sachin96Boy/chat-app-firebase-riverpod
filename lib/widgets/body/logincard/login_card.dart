@@ -1,15 +1,17 @@
+import 'package:chat_app_firebase/controller/auth/auth_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class LoginCard extends StatefulWidget {
+class LoginCard extends ConsumerStatefulWidget {
   const LoginCard({
     super.key,
   });
 
   @override
-  State<LoginCard> createState() => _LoginCardState();
+  ConsumerState<LoginCard> createState() => _LoginCardState();
 }
 
-class _LoginCardState extends State<LoginCard> {
+class _LoginCardState extends ConsumerState<LoginCard> {
   final _emailController = TextEditingController();
   final _paswordController = TextEditingController();
 
@@ -34,8 +36,11 @@ class _LoginCardState extends State<LoginCard> {
     if (!validate) {
       return;
     }
-    print(email);
-    print(password);
+
+    // final authService
+    ref.read(authControllerProvider.notifier).login(email, password);
+
+    Navigator.of(context).pop();
   }
 
   @override

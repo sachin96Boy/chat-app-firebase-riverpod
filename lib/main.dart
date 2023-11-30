@@ -2,6 +2,7 @@
 import 'package:chat_app_firebase/screens/home_screen.dart';
 import 'package:chat_app_firebase/screens/login_screen.dart';
 import 'package:chat_app_firebase/screens/register_screen.dart';
+import 'package:chat_app_firebase/services/auth/auth_gate.dart';
 // import 'package:chat_app_firebase/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const HomeScreen(),
+      home: const Authgate(),
       routes: {
         LoginScreen.routeName: (context) => const LoginScreen(),
         RegisterScreen.routeName: (context) => const RegisterScreen(),

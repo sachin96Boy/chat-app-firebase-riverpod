@@ -1,10 +1,12 @@
+import 'package:chat_app_firebase/controller/auth/auth_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
+class CustomAppBar extends ConsumerWidget implements PreferredSizeWidget {
   const CustomAppBar({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return AppBar(
       backgroundColor: Colors.transparent,
       leading: IconButton(
@@ -20,12 +22,32 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       primary: true,
       centerTitle: true,
-      actions: const [
-        CircleAvatar(
-          child: Icon(
-            Icons.person,
+      actions: [
+        PopupMenuButton(
+          position: PopupMenuPosition.under,
+          itemBuilder: (context) => [
+            PopupMenuItem(
+                child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                alignment: Alignment.center,
+                backgroundColor: Colors.red,
+              ),
+              child: const Text(
+                'Signout',
+                style: TextStyle(color: Colors.white),
+              ),
+              onPressed: () {
+                ref.read(authControllerProvider.notifier).signOut();
+                Navigator.of(context).pop();
+              },
+            ))
+          ],
+          child: const CircleAvatar(
+            child: Icon(
+              Icons.person,
+            ),
           ),
-        )
+        ),
       ],
     );
   }
