@@ -1,4 +1,5 @@
 import 'package:chat_app_firebase/controller/auth/auth_controller.dart';
+import 'package:chat_app_firebase/controller/auth/auth_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -39,12 +40,21 @@ class _LoginCardState extends ConsumerState<LoginCard> {
 
     // final authService
     ref.read(authControllerProvider.notifier).login(email, password);
-
-    Navigator.of(context).pop();
   }
 
   @override
   Widget build(BuildContext context) {
+    // relese the page if the state is successful
+    ref.listen<AuthState>(authControllerProvider, (previous, next) {
+      if (next is AuthStateError) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text(next.error),
+        ));
+      } else if (next is AuthStateSuccess) {
+        Navigator.of(context).pop();
+      }
+    });
+
     final size = MediaQuery.of(context).size;
     return Form(
         key: _formKey,
