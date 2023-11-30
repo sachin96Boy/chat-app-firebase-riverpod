@@ -36,14 +36,15 @@ class AuthService {
           .createUserWithEmailAndPassword(email: email, password: password);
 
       final user = <String, dynamic>{
+        'uid': userCredential.user?.uid,
         'firstName': name,
         'email': userCredential.user?.email,
       };
 
       await _firestore
           .collection('USER')
-          .add(user)
-          .then((value) => print(value));
+          .doc(userCredential.user?.uid)
+          .set(user);
 
       return userCredential;
     } on FirebaseAuthException catch (e) {

@@ -2,6 +2,7 @@
 import 'package:chat_app_firebase/screens/home_screen.dart';
 import 'package:chat_app_firebase/screens/login_screen.dart';
 import 'package:chat_app_firebase/screens/register_screen.dart';
+
 import 'package:chat_app_firebase/services/auth/auth_gate.dart';
 // import 'package:chat_app_firebase/screens/login_screen.dart';
 import 'package:flutter/material.dart';

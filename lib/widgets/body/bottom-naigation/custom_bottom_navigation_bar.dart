@@ -2,8 +2,11 @@ import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+typedef void IntCallback(int value);
+
 class CustomBottomNavigationBar extends StatefulWidget {
-  const CustomBottomNavigationBar({super.key});
+  final IntCallback callback;
+  const CustomBottomNavigationBar({super.key, required this.callback});
 
   @override
   State<CustomBottomNavigationBar> createState() =>
@@ -28,6 +31,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
     setState(() {
       _selectedIndex = index;
     });
+    widget.callback(_selectedIndex);
   }
 
   @override
