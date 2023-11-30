@@ -1,13 +1,16 @@
+import 'package:chat_app_firebase/controller/auth/auth_controller.dart';
+import 'package:chat_app_firebase/controller/auth/auth_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class RegisterCard extends StatefulWidget {
+class RegisterCard extends ConsumerStatefulWidget {
   const RegisterCard({super.key});
 
   @override
-  State<RegisterCard> createState() => _RegisterCardState();
+  ConsumerState<RegisterCard> createState() => _RegisterCardState();
 }
 
-class _RegisterCardState extends State<RegisterCard> {
+class _RegisterCardState extends ConsumerState<RegisterCard> {
   final _emailController = TextEditingController();
   final _nameController = TextEditingController();
   final _paswordController = TextEditingController();
@@ -38,13 +41,23 @@ class _RegisterCardState extends State<RegisterCard> {
     if (!validate) {
       return;
     }
-    print(name);
-    print(email);
-    print(password);
+
+    //  final auth reg service
+    ref.read(authControllerProvider.notifier).signup(name, email, password);
   }
 
   @override
   Widget build(BuildContext context) {
+    // relese the page if the state is successful
+    ref.listen<AuthState>(authControllerProvider, (previous, next) {
+      if (next is AuthStateError) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text(next.error),
+        ));
+      } else if (next is AuthStateSuccess) {
+        Navigator.of(context).pop();
+      }
+    });
     final size = MediaQuery.of(context).size;
     return Form(
         key: _formKey,

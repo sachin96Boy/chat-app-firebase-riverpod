@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:chat_app_firebase/providers/firebase_providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -18,6 +17,19 @@ class AuthController extends StateNotifier<AuthState> {
       await ref
           .read(firebaseAuthServiceProvider)
           .signInWithEmailandPassword(email, password);
+      state = const AuthStateSuccess();
+    } catch (e) {
+      state = AuthStateError(e.toString());
+    }
+  }
+
+  void signup(String name, String email, String password) async {
+    state = const AuthStateLoading();
+
+    try {
+      await ref
+          .read(firebaseAuthServiceProvider)
+          .signupWithEmailandPassword(name, email, password);
       state = const AuthStateSuccess();
     } catch (e) {
       state = AuthStateError(e.toString());
