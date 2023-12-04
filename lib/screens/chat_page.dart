@@ -40,7 +40,6 @@ class _ChatPageState extends ConsumerState<ChatPage> {
 
   @override
   Widget build(BuildContext context) {
-    print(messageController.text);
     final args =
         ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>;
     final userName = args['userName'] as String;
@@ -91,7 +90,43 @@ class _ChatPageState extends ConsumerState<ChatPage> {
                           .map((e) => e.data() as Map<String, dynamic>)
                           .toList();
                       String message = data[index]['message'];
-                      return Text(message);
+                      String senderId = data[index]['senderId'];
+                      final alignment = currentUser.uid == senderId
+                          ? Alignment.centerRight
+                          : Alignment.centerLeft;
+
+                      final color = currentUser.uid == senderId
+                          ? Colors.green
+                          : Colors.grey;
+                      return Row(
+                        children: [
+                          alignment == Alignment.centerRight
+                              ? const Spacer()
+                              : const SizedBox(),
+                          Container(
+                            alignment: alignment,
+                            margin: const EdgeInsets.symmetric(
+                                vertical: 10.0, horizontal: 5),
+                            decoration: BoxDecoration(
+                              color: color,
+                              borderRadius: BorderRadius.circular(
+                                20.0,
+                              ),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                message,
+                                style: const TextStyle(
+                                    color: Colors.white, fontSize: 16),
+                              ),
+                            ),
+                          ),
+                          alignment == Alignment.centerLeft
+                              ? const Spacer()
+                              : const SizedBox()
+                        ],
+                      );
                     },
                   ),
                 );
