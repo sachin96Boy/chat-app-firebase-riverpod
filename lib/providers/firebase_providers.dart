@@ -1,4 +1,5 @@
 import 'package:chat_app_firebase/services/auth/auth_service.dart';
+import 'package:chat_app_firebase/services/chat/chat_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -14,3 +15,6 @@ final firebasefirestoreStateProvier = StreamProvider.autoDispose(
 
 final firebaseAuthInstanceProvider =
     Provider.autoDispose((ref) => FirebaseAuth.instance.currentUser);
+
+final firebaseChatServiceProvider = Provider.autoDispose(
+    (ref) => ChatService(FirebaseAuth.instance, FirebaseFirestore.instance));

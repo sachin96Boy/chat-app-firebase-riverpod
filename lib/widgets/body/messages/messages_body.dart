@@ -8,8 +8,10 @@ class MessagesBody extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+
     final chatState = ref.watch(firebasefirestoreStateProvier);
     final authUser = ref.watch(firebaseAuthInstanceProvider);
+
     return Stack(
       children: [
         Positioned(
@@ -37,7 +39,8 @@ class MessagesBody extends ConsumerWidget {
                         onTap: () => Navigator.of(context)
                             .pushNamed(ChatPage.routeName, arguments: {
                           'userName': data['firstName'],
-                          'userEmail': data['email']
+                          'userEmail': data['email'],
+                          'userId': data['uid'],
                         }),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
