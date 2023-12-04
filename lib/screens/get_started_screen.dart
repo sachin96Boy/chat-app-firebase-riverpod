@@ -3,6 +3,7 @@ import 'package:chat_app_firebase/screens/register_screen.dart';
 import 'package:chat_app_firebase/widgets/logo/app_logo.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+// import 'package:sentry_flutter/sentry_flutter.dart';
 
 class GetStartedScreen extends StatelessWidget {
   static const routeName = '/get-started';
@@ -87,8 +88,16 @@ class GetStartedScreen extends StatelessWidget {
                   ],
                 ),
                 ElevatedButton(
-                  onPressed: () {
+                  onPressed: () async {
                     Navigator.of(context).pushNamed(RegisterScreen.routeName);
+                    // try {
+                    //   aMethodThatMightFail();
+                    // } catch (exception, stackTrace) {
+                    //   await Sentry.captureException(
+                    //     exception,
+                    //     stackTrace: stackTrace,
+                    //   );
+                    // }
                   },
                   style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.white,

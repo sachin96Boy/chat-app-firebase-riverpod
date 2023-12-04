@@ -42,6 +42,7 @@ dependencies:
   cloud_firestore: ^4.13.3
   flutter_riverpod: ^2.4.9
   equatable: ^2.0.5
+  sentry_flutter: ^7.13.2
 
 dev_dependencies:
   flutter_test:
