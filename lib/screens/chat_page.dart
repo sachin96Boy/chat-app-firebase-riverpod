@@ -36,8 +36,11 @@ class _ChatPageState extends ConsumerState<ChatPage> {
     messageController.clear();
   }
 
+  bool isShowSend = false;
+
   @override
   Widget build(BuildContext context) {
+    print(messageController.text);
     final args =
         ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>;
     final userName = args['userName'] as String;
@@ -84,15 +87,20 @@ class _ChatPageState extends ConsumerState<ChatPage> {
                   child: ListView.builder(
                     itemCount: messageData.length,
                     itemBuilder: (context, index) {
-                      final data = messageData.map((e) => e.data()).toList();
-                      return Text(data[index].toString());
+                      final data = messageData
+                          .map((e) => e.data() as Map<String, dynamic>)
+                          .toList();
+                      String message = data[index]['message'];
+                      return Text(message);
                     },
                   ),
                 );
               } else {
-                children = const SizedBox(
-                  child: Center(
-                    child: CircularProgressIndicator(),
+                children = const Expanded(
+                  child: SizedBox(
+                    child: Center(
+                      child: CircularProgressIndicator(),
+                    ),
                   ),
                 );
               }
@@ -123,20 +131,38 @@ class _ChatPageState extends ConsumerState<ChatPage> {
                         icon: const Icon(Icons.file_copy),
                       ),
                     ),
+                    onChanged: (value) {
+                      setState(() {
+                        if (value.isEmpty || value == '') {
+                          isShowSend = false;
+                        } else {
+                          isShowSend = true;
+                        }
+                      });
+                    },
                   ),
                 ),
               ),
-              IconButton(
-                  onPressed: () {
-                    sendMessage(userId);
-                  },
-                  icon: const CircleAvatar(
-                    backgroundColor: Colors.green,
-                    child: Icon(
-                      Icons.send,
-                      color: Colors.white,
-                    ),
-                  ))
+              (!isShowSend)
+                  ? Row(
+                      children: [
+                        IconButton(
+                            onPressed: () {}, icon: const Icon(Icons.camera)),
+                        IconButton(
+                            onPressed: () {}, icon: const Icon(Icons.mic)),
+                      ],
+                    )
+                  : IconButton(
+                      onPressed: () {
+                        sendMessage(userId);
+                      },
+                      icon: const CircleAvatar(
+                        backgroundColor: Colors.green,
+                        child: Icon(
+                          Icons.send,
+                          color: Colors.white,
+                        ),
+                      )),
             ],
           )
         ],
