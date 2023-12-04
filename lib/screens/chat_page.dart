@@ -99,86 +99,83 @@ class _ChatPageState extends ConsumerState<ChatPage> {
               return children;
             },
           ),
-          (messageController.value != TextEditingValue.empty)
-              ? Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    IconButton(
-                        onPressed: () {}, icon: const Icon(Icons.attach_file)),
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: TextFormField(
-                          controller: messageController,
-                          maxLines: null,
-                          keyboardType: TextInputType.multiline,
-                          decoration: InputDecoration(
-                            filled: true,
-                            fillColor: Colors.grey[200],
-                            hintText: 'Write your message',
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20.0),
-                              borderSide: BorderSide.none,
-                            ),
-                            suffixIcon: IconButton(
-                              onPressed: () {},
-                              icon: const Icon(Icons.file_copy),
-                            ),
-                          ),
-                        ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              IconButton(onPressed: () {}, icon: const Icon(Icons.attach_file)),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextFormField(
+                    controller: messageController,
+                    maxLines: null,
+                    keyboardType: TextInputType.multiline,
+                    decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Colors.grey[200],
+                      hintText: 'Write your message',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20.0),
+                        borderSide: BorderSide.none,
+                      ),
+                      suffixIcon: IconButton(
+                        onPressed: () {},
+                        icon: const Icon(Icons.file_copy),
                       ),
                     ),
-                    IconButton(
-                        onPressed: () {
-                          sendMessage(userId);
-                        },
-                        icon: const CircleAvatar(
-                          backgroundColor: Colors.green,
-                          child: Icon(
-                            Icons.send,
-                            color: Colors.white,
-                          ),
-                        ))
-                  ],
-                )
-              : const SizedBox()
-        ],
-      ),
-      bottomNavigationBar: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.attach_file)),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextFormField(
-                controller: messageController,
-                maxLines: null,
-                keyboardType: TextInputType.multiline,
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: Colors.grey[200],
-                  hintText: 'Write your message',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20.0),
-                    borderSide: BorderSide.none,
-                  ),
-                  suffixIcon: IconButton(
-                    onPressed: () {},
-                    icon: const Icon(Icons.file_copy),
                   ),
                 ),
-                onFieldSubmitted: (value) {
-                  print(value);
-                },
               ),
-            ),
-          ),
-          IconButton(onPressed: () {}, icon: const Icon(Icons.camera)),
-          IconButton(onPressed: () {}, icon: const Icon(Icons.mic)),
+              IconButton(
+                  onPressed: () {
+                    sendMessage(userId);
+                  },
+                  icon: const CircleAvatar(
+                    backgroundColor: Colors.green,
+                    child: Icon(
+                      Icons.send,
+                      color: Colors.white,
+                    ),
+                  ))
+            ],
+          )
         ],
       ),
+      // bottomNavigationBar: Row(
+      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      //   crossAxisAlignment: CrossAxisAlignment.center,
+      //   children: [
+      //     IconButton(onPressed: () {}, icon: const Icon(Icons.attach_file)),
+      //     Expanded(
+      //       child: Padding(
+      //         padding: const EdgeInsets.all(8.0),
+      //         child: TextFormField(
+      //           controller: messageController,
+      //           maxLines: null,
+      //           keyboardType: TextInputType.multiline,
+      //           decoration: InputDecoration(
+      //             filled: true,
+      //             fillColor: Colors.grey[200],
+      //             hintText: 'Write your message',
+      //             border: OutlineInputBorder(
+      //               borderRadius: BorderRadius.circular(20.0),
+      //               borderSide: BorderSide.none,
+      //             ),
+      //             suffixIcon: IconButton(
+      //               onPressed: () {},
+      //               icon: const Icon(Icons.file_copy),
+      //             ),
+      //           ),
+      //           onFieldSubmitted: (value) {
+      //             print(value);
+      //           },
+      //         ),
+      //       ),
+      //     ),
+      //     IconButton(onPressed: () {}, icon: const Icon(Icons.camera)),
+      //     IconButton(onPressed: () {}, icon: const Icon(Icons.mic)),
+      //   ],
+      // ),
     );
   }
 }
